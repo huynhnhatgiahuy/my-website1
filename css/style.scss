@@ -1,0 +1,290 @@
+/* ==========================================================================
+   [PHẦN 2: CSS3 & SCSS]
+   ========================================================================== */
+
+// 1. Khai báo biến (Variables)
+$primary-color: #2563eb;
+$primary-hover: #1d4ed8;
+$bg-light: #ffffff;
+$bg-alt-light: #f8fafc;
+$text-light: #0f172a;
+$card-bg-light: #ffffff;
+
+$bg-dark: #0f172a;
+$bg-alt-dark: #1e293b;
+$text-dark: #f8fafc;
+$card-bg-dark: #1e293b;
+
+$font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$radius: 12px;
+$transition: all 0.3s ease;
+
+// 2. Mixin tái sử dụng
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin card-style($bg: $card-bg-light) {
+  background-color: $bg;
+  border-radius: $radius;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: $transition;
+}
+
+// 3. Kiểm soát Box Model áp dụng toàn cục
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-main;
+  background-color: $bg-light;
+  color: $text-light;
+  line-height: 1.6;
+  transition: $transition;
+
+  // Mode Tối (Dark Mode)
+  &.dark-theme {
+    background-color: $bg-dark;
+    color: $text-dark;
+
+    .bg-alt { background-color: $bg-alt-dark; }
+    .site-header { background-color: rgba(15, 23, 42, 0.9); border-bottom-color: #334155; }
+    .data-table th { background-color: #334155; color: #fff; }
+    .data-table td { border-bottom-color: #334155; }
+    .project-card, .skill-card, .contact-form { @include card-style($card-bg-dark); border: 1px solid #334155; }
+    input, textarea { background-color: #0f172a; color: $text-dark; border-color: #334155; }
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+// Layout Căn bản (Mobile-First)
+.site-header {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 100;
+
+  .header-wrap {
+    @include flex-center(column, space-between, center);
+    padding: 1rem 0;
+  }
+
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-color;
+    text-decoration: none;
+    span { color: #ef4444; }
+  }
+}
+
+// [Phần 2 - Yêu cầu 2]: Navbar bằng Flexbox
+.navbar {
+  @include flex-center(row, center, center);
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      &:hover { color: $primary-color; }
+    }
+  }
+
+  .btn-theme {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: inherit;
+  }
+}
+
+.section {
+  padding: 4rem 0;
+  &.bg-alt { background-color: $bg-alt-light; }
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+// Hero Section
+.hero-grid {
+  @include flex-center(column, center, center);
+  text-align: center;
+  gap: 2rem;
+
+  .avatar-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid $primary-color;
+  }
+
+  .highlight { color: $primary-color; }
+}
+
+// Data Table Style
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: 2.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  @include card-style();
+
+  caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f1f5f9;
+  }
+
+  td {
+    border-bottom: 1px solid #e2e8f0;
+  }
+}
+
+.badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &-success { background-color: #dcfce7; color: #15803d; }
+  &-complete { background-color: #dbeafe; color: #1d4ed8; }
+}
+
+// [Phần 2 - Yêu cầu 2]: Phần nội dung chính dùng CSS Grid
+.skills-grid, .projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.skill-card, .project-card {
+  @include card-style();
+  &:hover { transform: translateY(-4px); }
+}
+
+.contact-form {
+  @include card-style();
+  max-width: 600px;
+  margin: 0 auto;
+
+  .form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    &:hover { background-color: $primary-hover; }
+  }
+}
+
+.form-response {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  display: none;
+  &.success { display: block; background-color: #dcfce7; color: #15803d; }
+  &.error { display: block; background-color: #fee2e2; color: #b91c1c; }
+}
+
+.site-footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  background-color: #0f172a;
+  color: white;
+}
+
+// [Phần 2 - Yêu cầu 3]: Responsive sử dụng Media Queries (Breakpoints)
+@media (min-width: 768px) {
+  .site-header .header-wrap {
+    flex-direction: row;
+  }
+
+  .navbar { margin-top: 0; }
+
+  .hero-grid {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
