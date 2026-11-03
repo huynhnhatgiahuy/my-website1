@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Cá Nhân | Portfolio</title>
+    <!-- [Phần 3 - Yêu cầu 3]: Đã kiểm tra link style.css thay vì .scss -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- [Phần 1 - Yêu cầu 1]: Thẻ Semantic Header & Nav -->
+    <header class="site-header">
+        <div class="container header-wrap">
+            <div class="logo">
+                <a href="#">HuyPortfolio<span>.</span></a>
+            </div>
+
+            <!-- [Phần 2 - Yêu cầu 2]: Navbar sử dụng Flexbox -->
+            <nav class="navbar" aria-label="Điều hướng chính">
+                <ul class="nav-links">
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#skills">Kỹ năng</a></li>
+                    <li><a href="#projects">Dự án</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+                <!-- [Phần 4 - Yêu cầu 3]: Nút chuyển đổi Dark/Light mode -->
+                <button id="theme-toggle" class="btn-theme" aria-label="Đổi giao diện">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- [Phần 1 - Yêu cầu 1]: Thẻ Semantic Main -->
+    <main>
+        <!-- Section: Giới thiệu cá nhân -->
+        <section id="about" class="section hero-section">
+            <div class="container hero-grid">
+                <div class="hero-avatar">
+                    <!-- [Phần 1 - Yêu cầu 4]: Thuộc tính alt cho accessibility -->
+                    <img src="https://picsum.photos/300/300" alt="Ảnh chân dung Lập trình viên" class="avatar-img">
+                </div>
+                <div class="hero-content">
+                    <h1>Xin chào, tôi là <span class="highlight">Huỳnh Nhật Gia Huy</span></h1>
+                    <p class="subtitle">Web Developer & Project Manager Trainee</p>
+                    <p class="desc">Đam mê xây dựng các sản phẩm web tối ưu trải nghiệm người dùng, cấu trúc chuẩn chuẩn SEO và hiệu năng cao.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Bảng quá trình học tập / Kỹ năng -->
+        <section id="skills" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title">Năng Lực & Trình Độ</h2>
+                
+                <!-- [Phần 1 - Yêu cầu 3]: Bảng HTML5 chuẩn thead/tbody/tr/td -->
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <caption>Quá trình Đào tạo & Chứng chỉ</caption>
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>Chuyên ngành / Khóa học</th>
+                                <th>Đơn vị đào tạo</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023 - Nay</td>
+                                <td>Công nghệ Thông tin</td>
+                                <td>Trường Đại học Gia Định</td>
+                                <td><span class="badge badge-success">Đang học</span></td>
+                            </tr>
+                            <tr>
+                                <td>2024</td>
+                                <td>Lập trình Web Front-End</td>
+                                <td>Khoa CNTT - GDU</td>
+                                <td><span class="badge badge-complete">Hoàn thành</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- [Phần 3 - Yêu cầu 2]: Nơi render danh sách kỹ năng động từ JS -->
+                <div class="skills-block">
+                    <h3>Kỹ Năng Chuyên Môn</h3>
+                    <div id="skills-container" class="skills-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Danh sách Dự án -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Dự Án Đã Thực Hiện</h2>
+                <!-- [Phần 4 - Yêu cầu 2]: Nơi render danh sách dự án lấy từ data.json qua Fetch API -->
+                <div id="projects-container" class="projects-grid">
+                    <p class="loading-text">Đang tải danh sách dự án...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Form Liên hệ -->
+        <section id="contact" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title">Gửi Tin Nhắn</h2>
+                
+                <!-- [Phần 1 - Yêu cầu 2]: Form liên hệ với đầy đủ input types & HTML5 validate -->
+                <form id="contact-form" class="contact-form" >
+                    <div class="form-group">
+                        <!-- [Phần 1 - Yêu cầu 4]: Label gắn khớp id tương ứng -->
+                        <label for="fullname">Họ và tên *</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Nhập họ tên của bạn" required minlength="3">
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Địa chỉ Email *</label>
+                        <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại *</label>
+                        <!-- HTML5 pattern validate số điện thoại Việt Nam -->
+                        <input type="tel" id="phone" name="phone" placeholder="0901234567" pattern="(0[3|5|7|8|9])+([0-9]{8})\b" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meeting-date">Ngày hẹn tư vấn</label>
+                        <input type="date" id="meeting-date" name="meeting-date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Nội dung tin nhắn *</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Nhập lời nhắn tại đây..." required></textarea>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Gửi Thông Tin</button>
+                    <div id="form-response" class="form-response"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- [Phần 1 - Yêu cầu 1]: Thẻ Semantic Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Huỳnh Nhật Gia Huy. Bảo lưu mọi quyền.</p>
+        </div>
+        <div class="footer-right">
+                <a href="mailto:giahuy.toky.91@gmail.com">Email</a> | 
+                <a href="tel:0915098506">0915098506</a> | 
+            </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
