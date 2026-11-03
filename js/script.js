@@ -18,18 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
        [PHẦN 3 - YÊU CẦU 4 & 2]: Sử dụng Arrow Function & map() render ra DOM
        ---------------------------------------------------------------------- */
     const renderSkills = () => {
-        const skillsContainer = document.getElementById('skills-container');
-        if (!skillsContainer) return;
+    const skillsContainer = document.getElementById('skills-container');
+    if (!skillsContainer) return;
 
-        // Dùng map() tạo template chuỗi HTML
-        const skillsHTML = staticSkills.map(skill => `
-            <div class="skill-card">
-                <h4>${skill.ten}</h4>
-                <p>Mức độ: <strong>${skill.mucDo}</strong></p>
+    const skillsHTML = staticSkills.map(skill => `
+        <div class="skill-card">
+            <h4>${skill.ten}</h4>
+            <div class="skill-level">
+                <span>Mức độ:</span>
+                <span class="badge ${skill.mucDo === 'Thành thạo' ? 'badge-success' : 'badge-complete'}">
+                    ${skill.mucDo}
+                </span>
             </div>
-        `).join('');
+        </div>
+     `).join('');
 
-        skillsContainer.innerHTML = skillsHTML;
+     skillsContainer.innerHTML = skillsHTML;
     };
 
     renderSkills(); // Gọi hàm render kỹ năng tĩnh
